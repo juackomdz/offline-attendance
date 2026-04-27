@@ -1,13 +1,15 @@
-import { type CheckinInput, type Asistencia, asistencias } from "#shared/types";
+import { type Asistencia, asistencias } from "#shared/types";
+import { schema } from "#shared/schema";
+import { formatRut } from "rut-kit";
 
 export default eventHandler(async (event) => {
-  const body: CheckinInput = await readBody(event);
+  const { data: body } = await readValidatedBody(event, schema.safeParse);
 
   const asistencia: Asistencia = {
-    rut: body.rut,
-    nombre: body.nombre,
+    rut: formatRut(body?.rut as string, "formatted"),
+    nombre: body?.nombre,
     hora_salida: new Date(),
-  };
+  } as Asistencia;
 
   asistencias.push(asistencia);
   return {

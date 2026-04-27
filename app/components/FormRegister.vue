@@ -1,17 +1,25 @@
 <script setup lang="ts">
 import { useForm } from "@tanstack/vue-form";
+
+import { schema } from "#shared/schema";
+
 import InputText from "primevue/inputtext";
 import Button from "primevue/button";
 import Card from "primevue/card";
+import Toast from "primevue/toast";
 
 type SubmitMeta = {
   endpoint: "checkin" | "checkout";
 };
 
+const toast = useToast();
 const form = useForm({
   defaultValues: {
     rut: "",
     nombre: "",
+  },
+  validators: {
+    onChange: schema,
   },
   onSubmitMeta: { endpoint: "checkin" } as SubmitMeta,
   onSubmit: async ({ value, meta }) => {
@@ -24,6 +32,12 @@ const form = useForm({
               nombre: value.nombre,
               rut: value.rut,
             },
+          });
+          toast.add({
+            summary: "Registro Exitoso",
+            life: 3000,
+            detail: "Ingreso registrado exitosamente",
+            severity: "success",
           });
           form.reset();
         } catch (err: any) {
@@ -38,6 +52,12 @@ const form = useForm({
               nombre: value.nombre,
               rut: value.rut,
             },
+          });
+          toast.add({
+            summary: "Registro Exitoso",
+            life: 3000,
+            detail: "Salida registrada exitosamente",
+            severity: "success",
           });
           form.reset();
         } catch (error) {
@@ -64,6 +84,13 @@ const form = useForm({
                 @input="(e) => field.handleChange((e.target as HTMLInputElement).value)"
                 fluid
               />
+              <Message
+                variant="simple"
+                severity="error"
+                size="small"
+                v-if="!field.state.meta.isValid"
+                >{{ field.state.meta.errors[0]?.message }}</Message
+              >
             </form.Field>
           </div>
           <div class="mb-5">
@@ -75,8 +102,16 @@ const form = useForm({
                 @input="(e) => field.handleChange((e.target as HTMLInputElement).value)"
                 fluid
               />
+              <Message
+                variant="simple"
+                severity="error"
+                size="small"
+                v-if="!field.state.meta.isValid"
+                >{{ field.state.meta.errors[0]?.message }}</Message
+              >
             </form.Field>
           </div>
+          <Toast position="top-center" />
           <div id="buttons" class="items-center flex gap-8 ml-9">
             <Button
               type="button"
@@ -93,6 +128,10 @@ const form = useForm({
         </form>
       </template>
     </Card>
-    <img src="/illustration-attendance.svg" alt="Ilustración de asistencia" class="w-80 h-80 object-contain" />
+    <img
+      src="/illustration-attendance.svg"
+      alt="Ilustración de asistencia"
+      class="w-80 h-80 object-contain"
+    />
   </div>
 </template>
