@@ -1,6 +1,13 @@
+<script setup>
+import "~/assets/css/responsive.css"
+</script>
+
 <template>
   <div>
     <NuxtPwaManifest />
-    <NuxtPage />
+    <AppHeader />
+    <main class="pt-16">
+      <NuxtPage />
+    </main>
   </div>
 </template>

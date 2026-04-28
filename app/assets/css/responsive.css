@@ -1,0 +1,115 @@
+@import 'primeicons/primeicons.css';
+/* Estilos responsive personalizados para control-asistencia */
+
+/* Touch targets optimizados para móviles */
+.p-button {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0.75rem 1rem !important;
+}
+
+.p-inputtext {
+  min-height: 44px;
+  padding: 0.75rem 1rem;
+}
+
+.p-card .p-card-content {
+  padding: 1.5rem;
+}
+
+.p-card .p-card-title {
+  padding: 1.5rem 1.5rem 0;
+}
+
+/* Animaciones suaves */
+* {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* Scroll suave */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Estilos para el header en móvil */
+@media (max-width: 767px) {
+  .mobile-menu-panel {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border-top: 1px solid #e5e7eb;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+}
+
+/* Dark mode prepared */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #1f2937;
+    --text-color: #f9fafb;
+  }
+}
+
+/* Estilos optimizados para Toast en móvil */
+@media (max-width: 639px) {
+  .p-toast {
+    top: 20px !important;
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+    width: 95vw !important;
+    max-width: 380px !important;
+  }
+  
+  .p-toast-message {
+    margin: 0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+  
+  .p-toast-message-content {
+    padding: 1rem !important;
+    align-items: center !important;
+  }
+  
+  .p-toast-message-text {
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+  
+  .p-toast-summary {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+}
+
+/* Desktop: Toast top-center pero más anchos */
+@media (min-width: 640px) {
+  .p-toast {
+    width: 400px !important;
+  }
+}
+
+/* Imagen responsiva adicional */
+.responsive-image {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.responsive-image:hover {
+  transform: scale(1.02);
+}
+
+/* Optimización para dispositivos táctiles */
+@media (hover: none) and (pointer: coarse) {
+  .p-button:hover {
+    background: initial;
+  }
+  
+  .p-button:active {
+    transform: scale(0.98);
+  }
+}

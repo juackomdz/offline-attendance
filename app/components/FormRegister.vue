@@ -73,8 +73,8 @@ const form = useForm({
 </script>
 
 <template>
-  <div class="flex gap-12 items-center">
-    <Card style="width: 28rem; overflow: hidden">
+  <div class="flex flex-col lg:flex-row gap-6 lg:gap-12 items-center justify-center">
+    <Card class="w-full max-w-md lg:w-[28rem] lg:max-w-none">
       <template #title> Registro de Asistencias </template>
       <template #content>
         <form>
@@ -132,18 +132,25 @@ const form = useForm({
               >
             </form.Field>
           </div>
-          <Toast position="top-center" />
-          <div id="buttons" class="items-center flex gap-8 ml-9">
+          <Toast 
+            position="top-center" 
+            :pt="{
+              root: { class: 'w-[95vw] sm:w-[25rem]' }
+            }"
+          />
+          <div id="buttons" class="flex flex-col sm:flex-row gap-4 lg:gap-8 justify-center">
             <Button
               type="button"
               label="Registrar Entrada"
               @click="form.handleSubmit({ endpoint: 'checkin' })"
+              class="min-h-[44px]"
             />
             <Button
               type="button"
               label="Registrar Salida"
               severity="danger"
               @click="form.handleSubmit({ endpoint: 'checkout' })"
+              class="min-h-[44px]"
             />
           </div>
         </form>
@@ -152,7 +159,7 @@ const form = useForm({
     <img
       src="/illustration-attendance.svg"
       alt="Ilustración de asistencia"
-      class="w-80 h-80 object-contain"
+      class="w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80 xl:w-96 xl:h-96 object-contain"
     />
   </div>
 </template>
