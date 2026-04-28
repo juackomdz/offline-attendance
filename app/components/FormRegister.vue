@@ -17,6 +17,7 @@ const form = useForm({
   defaultValues: {
     rut: "",
     nombre: "",
+    apellido: "",
   },
   validators: {
     onChange: schema,
@@ -31,6 +32,7 @@ const form = useForm({
             body: {
               nombre: value.nombre,
               rut: value.rut,
+              apellido: value.apellido,
             },
           });
           toast.add({
@@ -51,6 +53,7 @@ const form = useForm({
             body: {
               nombre: value.nombre,
               rut: value.rut,
+              apellido: value.apellido,
             },
           });
           toast.add({
@@ -98,7 +101,25 @@ const form = useForm({
               <InputText
                 :name="field.name"
                 :value="field.state.value"
-                placeholder="Nombre"
+                placeholder="Nombres"
+                @input="(e) => field.handleChange((e.target as HTMLInputElement).value)"
+                fluid
+              />
+              <Message
+                variant="simple"
+                severity="error"
+                size="small"
+                v-if="!field.state.meta.isValid"
+                >{{ field.state.meta.errors[0]?.message }}</Message
+              >
+            </form.Field>
+          </div>
+          <div class="mb-5">
+            <form.Field name="apellido" v-slot="{ field }">
+              <InputText
+                :name="field.name"
+                :value="field.state.value"
+                placeholder="Apellidos"
                 @input="(e) => field.handleChange((e.target as HTMLInputElement).value)"
                 fluid
               />

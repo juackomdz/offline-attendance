@@ -8,6 +8,7 @@ export default eventHandler(async (event) => {
   const asistencia: Asistencia = {
     rut: formatRut(body?.rut as string, "formatted"),
     nombre: body?.nombre,
+    apellido: body?.apellido,
     hora_salida: new Date(),
   } as Asistencia;
 
