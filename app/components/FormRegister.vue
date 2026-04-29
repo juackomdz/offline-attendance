@@ -132,10 +132,10 @@ const form = useForm({
               >
             </form.Field>
           </div>
-          <Toast 
-            position="top-center" 
+          <Toast
+            position="top-center"
             :pt="{
-              root: { class: 'w-[95vw] sm:w-[25rem]' }
+              root: { class: 'w-[95vw] sm:w-[25rem]' },
             }"
           />
           <div id="buttons" class="flex flex-col sm:flex-row gap-4 lg:gap-8 justify-center">

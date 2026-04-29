@@ -1,5 +1,5 @@
 <script setup>
-import "~/assets/css/responsive.css"
+import "~/assets/css/responsive.css";
 </script>
 
 <template>
