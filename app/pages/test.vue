@@ -24,8 +24,20 @@
 import { Toast } from "primevue";
 import Button from "primevue/button";
 import { useToast } from "primevue/usetoast";
+import { isOnline } from "@/composables/useOnline";
+import { watch } from "vue";
 
 const toast = useToast();
+
+const { online } = isOnline();
+watch(online, () => {
+  toast.add({
+    detail: online.value == true ? "Sincronizando." : "Almacenando localmente.",
+    life: 2000,
+    summary: "Info",
+    severity: "warn",
+  });
+});
 
 const test = () => {
   toast.add({
