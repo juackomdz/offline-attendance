@@ -8,7 +8,6 @@ export default defineNuxtConfig({
   nitro: {
     preset: "bun",
   },
-  ssr: false,
   app: {
     head: {
       meta: [
