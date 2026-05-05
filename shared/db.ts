@@ -8,4 +8,4 @@ db.run(`CREATE TABLE IF NOT EXISTS REGISTROS
     nombres TEXT, 
     apellidos TEXT,
     tipo TEXT,
-    marcacion TEXT)`)
+    marcacion TEXT)`);

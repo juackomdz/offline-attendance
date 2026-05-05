@@ -2,9 +2,9 @@
 import { useForm } from "@tanstack/vue-form";
 
 import { schema } from "#shared/schema";
-import { isOnline } from "@/composables/useOnline"
+import { isOnline } from "@/composables/useOnline";
 
-const {online} = isOnline()
+const { online } = isOnline();
 
 import InputText from "primevue/inputtext";
 import Button from "primevue/button";
@@ -74,14 +74,14 @@ const form = useForm({
   },
 });
 
-watch(online, ()=> {
+watch(online, () => {
   toast.add({
     life: 2000,
-    summary: 'Info',
-    severity: 'contrast',
-    detail: online.value === true ? 'Sincronizando.' : 'Almacenando localmente.'
-  })
-})
+    summary: "Info",
+    severity: "contrast",
+    detail: online.value === true ? "Sincronizando." : "Almacenando localmente.",
+  });
+});
 </script>
 
 <template>
