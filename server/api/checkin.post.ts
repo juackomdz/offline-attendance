@@ -1,28 +1,28 @@
-//import { type Asistencia, /*asistencias*/ } from "#shared/types";
 import { schema } from "#shared/schema";
-//import { formatRut } from "rut-kit";
-import { db } from "#shared/db"
+import { formatRut } from "rut-kit";
+import { db } from "#shared/db";
 
 export default eventHandler(async (event) => {
   const { data: body } = await readValidatedBody(event, schema.safeParse);
 
-  /*
-  const asistencia: Asistencia = {
-    rut: formatRut(body?.rut as string, "formatted"),
-    nombre: body?.nombre,
-    apellido: body?.apellido,
-    hora_entrada: new Date(),
-  } as Asistencia;
-*/
-  //asistencias.push(asistencia);
-  const query = db.query("INSERT INTO TEST VALUES (1,'prueba')")
+  try {
+    const query = db.prepare(
+      `INSERT INTO REGISTROS (rut, nombres, apellidos, tipo, marcacion) VALUES ($rut, $nombres, $apellidos, $tipo, $marcacion);`,
+    );
 
-  const result = query.get()
+    query.run({
+      $rut: formatRut(body?.rut as string, "formatted"),
+      $nombres: body?.nombre as string,
+      $apellidos: body?.apellido as string,
+      $tipo: "entrada",
+      $marcacion: new Date().toISOString(),
+    });
 
-  return {
-    mensaje: "ok",
-    //data: asistencia,
-    //total: asistencias.length,
-    result
-  };
+    return {
+      mensaje: "ok",
+    };
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
 });
