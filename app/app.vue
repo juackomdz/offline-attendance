@@ -1,5 +1,7 @@
 <script setup>
 import "~/assets/css/responsive.css";
+
+useSync();
 </script>
 
 <template>
