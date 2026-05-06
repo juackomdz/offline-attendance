@@ -6,7 +6,6 @@ useSync();
 
 <template>
   <div>
-    <NuxtPwaManifest />
     <AppHeader />
     <main class="pt-16">
       <NuxtPage />
