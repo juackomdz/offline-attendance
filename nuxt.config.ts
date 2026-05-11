@@ -8,7 +8,7 @@ export default defineNuxtConfig({
   nitro: {
     preset: "bun",
     output: {
-      dir: ".dist"
+      dir: "dist"
     }
   },
   app: {
