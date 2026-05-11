@@ -3,11 +3,16 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
+    "build": "bun --bun nuxt build",
+    "dev": "bun --bun nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "test": "vitest",
+    "test:unit": "vitest run --config vitest.config.ts",
+    "test:e2e": "vitest run --config vitest.e2e.config.ts",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage"
   },
   "dependencies": {
     "@primeuix/themes": "^2.0.3",
@@ -23,7 +28,11 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@nuxt/test-utils": "^4.0.3",
     "@nuxtjs/tailwindcss": "^6.14.0",
-    "@primevue/nuxt-module": "^4.5.5"
+    "@primevue/nuxt-module": "^4.5.5",
+    "@vue/test-utils": "^2.4.10",
+    "happy-dom": "^20.9.0",
+    "vitest": "^4.1.5"
   }
 }

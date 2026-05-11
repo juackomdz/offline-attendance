@@ -1,6 +1,6 @@
 import { Database } from "bun:sqlite";
 
-export const db = new Database(":memory:");
+export const db = new Database("test.db");
 
 db.run(`CREATE TABLE IF NOT EXISTS REGISTROS 
     (id INTEGER PRIMARY KEY AUTOINCREMENT, 
