@@ -8,9 +8,10 @@ export default defineNuxtConfig({
   nitro: {
     vercel: {
       functions: {
-        runtime: "bun1.x"
+        runtime: "bun1.x",
       }
-    }
+    },
+    preset: "vercel"
   },
   app: {
     head: {
