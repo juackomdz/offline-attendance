@@ -6,10 +6,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ["@primevue/nuxt-module", "@nuxtjs/tailwindcss", "@nuxt/test-utils/module"],
   nitro: {
-    preset: "bun",
-    output: {
-      dir: "dist"
-    }
+    preset: "bun"
   },
   app: {
     head: {
