@@ -4,5 +4,5 @@
   "devCommand": "bun run dev",
   "framework": "nuxtjs",
   "installCommand": "bun install",
-  "outputDirectory": ".output"
+  "outputDirectory": ".output/public"
 }
