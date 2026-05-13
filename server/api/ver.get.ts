@@ -1,5 +1,5 @@
-import { asistencias } from "#shared/types";
+import { db } from "#shared/db"
 
 export default eventHandler(async () => {
-  return asistencias;
+  return db.query("select * from registros").all();
 });
