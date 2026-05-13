@@ -10,7 +10,8 @@ export default defineNuxtConfig({
       functions: {
         runtime: "bun1.x"
       }
-    }
+    },
+    preset: "vercel"
   },
   app: {
     head: {
