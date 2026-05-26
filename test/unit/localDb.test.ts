@@ -1,34 +1,35 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import type { Pendiente } from "../../app/utils/localDb";
 
-const { mockStore, createAddPendiente, createGetPendientes, createRemovePendiente } = vi.hoisted(() => {
-  const mockStore = {
-    pendientes: [] as Pendiente[],
-    autoId: 1,
-  };
+const { mockStore, createAddPendiente, createGetPendientes, createRemovePendiente } = vi.hoisted(
+  () => {
+    const mockStore = {
+      pendientes: [] as Pendiente[],
+      autoId: 1,
+    };
 
-  const createAddPendiente = () =>
-    vi.fn(async (data: Omit<Pendiente, "id" | "timestamp">) => {
-      const id = mockStore.autoId++;
-      mockStore.pendientes.push({
-        ...data,
-        id,
-        timestamp: new Date().toISOString(),
+    const createAddPendiente = () =>
+      vi.fn(async (data: Omit<Pendiente, "id" | "timestamp">) => {
+        const id = mockStore.autoId++;
+        mockStore.pendientes.push({
+          ...data,
+          id,
+          timestamp: new Date().toISOString(),
+        });
+        return id;
       });
-      return id;
-    });
 
-  const createGetPendientes = () =>
-    vi.fn(async () => [...mockStore.pendientes]);
+    const createGetPendientes = () => vi.fn(async () => [...mockStore.pendientes]);
 
-  const createRemovePendiente = () =>
-    vi.fn(async (id: number) => {
-      const idx = mockStore.pendientes.findIndex((p) => p.id === id);
-      if (idx >= 0) mockStore.pendientes.splice(idx, 1);
-    });
+    const createRemovePendiente = () =>
+      vi.fn(async (id: number) => {
+        const idx = mockStore.pendientes.findIndex((p) => p.id === id);
+        if (idx >= 0) mockStore.pendientes.splice(idx, 1);
+      });
 
-  return { mockStore, createAddPendiente, createGetPendientes, createRemovePendiente };
-});
+    return { mockStore, createAddPendiente, createGetPendientes, createRemovePendiente };
+  },
+);
 
 const addPendiente = createAddPendiente();
 const getPendientes = createGetPendientes();

@@ -45,11 +45,8 @@ describe("isOnline", () => {
     const result = isOnline();
     onlineRef = result.online;
 
-    mountedCallback = (onMounted as unknown as { _callback?: () => void })
-      ._callback;
-    unmountedCallback = (
-      onUnmounted as unknown as { _callback?: () => void }
-    )._callback;
+    mountedCallback = (onMounted as unknown as { _callback?: () => void })._callback;
+    unmountedCallback = (onUnmounted as unknown as { _callback?: () => void })._callback;
 
     mountedCallback?.();
     return result;
@@ -73,14 +70,8 @@ describe("isOnline", () => {
   it("registers online and offline event listeners on mount", async () => {
     await callIsOnline();
 
-    expect(window.addEventListener).toHaveBeenCalledWith(
-      "online",
-      expect.any(Function),
-    );
-    expect(window.addEventListener).toHaveBeenCalledWith(
-      "offline",
-      expect.any(Function),
-    );
+    expect(window.addEventListener).toHaveBeenCalledWith("online", expect.any(Function));
+    expect(window.addEventListener).toHaveBeenCalledWith("offline", expect.any(Function));
   });
 
   it("removes event listeners on unmount", async () => {
@@ -88,14 +79,8 @@ describe("isOnline", () => {
 
     unmountedCallback?.();
 
-    expect(window.removeEventListener).toHaveBeenCalledWith(
-      "online",
-      expect.any(Function),
-    );
-    expect(window.removeEventListener).toHaveBeenCalledWith(
-      "offline",
-      expect.any(Function),
-    );
+    expect(window.removeEventListener).toHaveBeenCalledWith("online", expect.any(Function));
+    expect(window.removeEventListener).toHaveBeenCalledWith("offline", expect.any(Function));
   });
 
   it("updates online to false when offline event fires", async () => {

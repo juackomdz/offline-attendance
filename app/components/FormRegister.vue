@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useForm } from "@tanstack/vue-form";
 
-import { schema } from "#shared/schema";
+import { schema } from "#shared/zod/schema";
 import { isOnline } from "@/composables/useOnline";
 import { addPendiente } from "@/utils/localDb";
 
@@ -82,13 +82,13 @@ const form = useForm({
 });
 
 watch(online, () => {
-  if(online.value === false){
+  if (online.value === false) {
     toast.add({
-    life: 2000,
-    summary: "Info",
-    severity: "contrast",
-    detail: "Almacenando localmente.",
-  });
+      life: 2000,
+      summary: "Info",
+      severity: "contrast",
+      detail: "Almacenando localmente.",
+    });
   }
 });
 </script>

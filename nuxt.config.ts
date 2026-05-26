@@ -9,16 +9,14 @@ export default defineNuxtConfig({
     vercel: {
       functions: {
         runtime: "bun1.x",
-      }
+      },
     },
-    preset: "vercel"
+    preset: "vercel",
   },
   app: {
     head: {
-      title: 'Asistencia',
-      link: [
-        { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
-      ],
+      title: "Asistencia",
+      link: [{ rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }],
       meta: [
         {
           name: "viewport",

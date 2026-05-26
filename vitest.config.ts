@@ -1,7 +1,7 @@
-import { defineConfig } from 'vitest/config'
-import path from 'node:path'
+import { defineConfig } from "vitest/config";
+import path from "node:path";
 
-const rootDir = path.resolve(__dirname)
+const rootDir = path.resolve(__dirname);
 
 export default defineConfig({
   test: {
@@ -9,17 +9,16 @@ export default defineConfig({
       {
         resolve: {
           alias: {
-            '@': path.resolve(rootDir, 'app'),
-            '#shared': path.resolve(rootDir, 'shared'),
+            "@": path.resolve(rootDir, "app"),
+            "#shared": path.resolve(rootDir, "shared"),
           },
         },
         test: {
-          name: 'unit',
-          include: ['test/unit/*.{test,spec}.ts'],
-          environment: 'node',
+          name: "unit",
+          include: ["test/unit/*.{test,spec}.ts"],
+          environment: "node",
         },
       },
-
     ],
   },
-})
+});

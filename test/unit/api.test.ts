@@ -36,11 +36,15 @@ describe("API route logic", () => {
 
   describe("checkin logic", () => {
     it("inserts an entrada record with formatted RUT", () => {
-      insertRegistro(db, {
-        rut: "11111111-1",
-        nombre: "Juan",
-        apellido: "Pérez",
-      }, "entrada");
+      insertRegistro(
+        db,
+        {
+          rut: "11111111-1",
+          nombre: "Juan",
+          apellido: "Pérez",
+        },
+        "entrada",
+      );
 
       const rows = db.query("SELECT * FROM REGISTROS").all() as Array<Record<string, unknown>>;
       expect(rows).toHaveLength(1);
@@ -51,20 +55,24 @@ describe("API route logic", () => {
     });
 
     it("sets marcacion as ISO date string", () => {
-      insertRegistro(db, {
-        rut: "11111111-1",
-        nombre: "Juan",
-        apellido: "Pérez",
-      }, "entrada");
+      insertRegistro(
+        db,
+        {
+          rut: "11111111-1",
+          nombre: "Juan",
+          apellido: "Pérez",
+        },
+        "entrada",
+      );
 
       const rows = db.query("SELECT * FROM REGISTROS").all() as Array<Record<string, unknown>>;
       expect(rows[0].marcacion).toMatch(/^\d{4}-\d{2}-\d{2}T/);
     });
 
     it("throws on invalid body", () => {
-      expect(() =>
-        insertRegistro(db, { rut: "", nombre: "", apellido: "" }, "entrada"),
-      ).toThrow("Validation failed");
+      expect(() => insertRegistro(db, { rut: "", nombre: "", apellido: "" }, "entrada")).toThrow(
+        "Validation failed",
+      );
     });
 
     it("throws on missing fields", () => {
@@ -82,11 +90,15 @@ describe("API route logic", () => {
 
   describe("checkout logic", () => {
     it("inserts a salida record with formatted RUT", () => {
-      insertRegistro(db, {
-        rut: "11111111-1",
-        nombre: "Juan",
-        apellido: "Pérez",
-      }, "salida");
+      insertRegistro(
+        db,
+        {
+          rut: "11111111-1",
+          nombre: "Juan",
+          apellido: "Pérez",
+        },
+        "salida",
+      );
 
       const rows = db.query("SELECT * FROM REGISTROS").all() as Array<Record<string, unknown>>;
       expect(rows).toHaveLength(1);
@@ -107,16 +119,24 @@ describe("API route logic", () => {
     });
 
     it("returns all registros in insertion order", () => {
-      insertRegistro(db, {
-        rut: "11111111-1",
-        nombre: "Ana",
-        apellido: "López",
-      }, "entrada");
-      insertRegistro(db, {
-        rut: "98765432-5",
-        nombre: "Pedro",
-        apellido: "Soto",
-      }, "salida");
+      insertRegistro(
+        db,
+        {
+          rut: "11111111-1",
+          nombre: "Ana",
+          apellido: "López",
+        },
+        "entrada",
+      );
+      insertRegistro(
+        db,
+        {
+          rut: "98765432-5",
+          nombre: "Pedro",
+          apellido: "Soto",
+        },
+        "salida",
+      );
 
       const rows = db.query("SELECT * FROM REGISTROS").all() as Array<Record<string, unknown>>;
       expect(rows).toHaveLength(2);

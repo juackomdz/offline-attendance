@@ -13,16 +13,15 @@ Sistema web de registro de entrada y salida para empleados/alumnos, construido c
 
 ## Stack
 
-| Capa        | Tecnología                     |
-| ----------- | ------------------------------ |
-| Framework   | Nuxt 4                         |
-| UI          | Vue 3, PrimeVue 4, Tailwind CSS |
-| Formularios | @tanstack/vue-form + Zod       |
-| Base de datos | SQLite (bun:sqlite)         |
-| Offline     | Dexie.js (IndexedDB)           |
-| Testing     | Vitest + happy-dom             |
-| Deploy      | Vercel (Bun 1.x)               |
-
+| Capa          | Tecnología                      |
+| ------------- | ------------------------------- |
+| Framework     | Nuxt 4                          |
+| UI            | Vue 3, PrimeVue 4, Tailwind CSS |
+| Formularios   | @tanstack/vue-form + Zod        |
+| Base de datos | SQLite (bun:sqlite)             |
+| Offline       | Dexie.js (IndexedDB)            |
+| Testing       | Vitest + happy-dom              |
+| Deploy        | Vercel (Bun 1.x)                |
 
 ## DEMO
 

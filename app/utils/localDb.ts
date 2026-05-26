@@ -22,9 +22,7 @@ class LocalDb extends Dexie {
 
 export const localDb = new LocalDb();
 
-export async function addPendiente(
-  data: Omit<Pendiente, "id" | "timestamp">,
-): Promise<number> {
+export async function addPendiente(data: Omit<Pendiente, "id" | "timestamp">): Promise<number> {
   const id = await localDb.pendientes.add({
     ...data,
     timestamp: new Date().toISOString(),

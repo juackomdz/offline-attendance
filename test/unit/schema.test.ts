@@ -46,9 +46,7 @@ describe("schema", () => {
       const result = schema.safeParse({ ...validInput, nombre: "" });
       expect(result.success).toBe(false);
       if (!result.success) {
-        const nombreError = result.error.issues.find(
-          (i) => i.path[0] === "nombre",
-        );
+        const nombreError = result.error.issues.find((i) => i.path[0] === "nombre");
         expect(nombreError?.message).toBe("Debe ingresar su nombre");
       }
     });
@@ -57,12 +55,8 @@ describe("schema", () => {
       const result = schema.safeParse({ ...validInput, nombre: "Juan123" });
       expect(result.success).toBe(false);
       if (!result.success) {
-        const nombreError = result.error.issues.find(
-          (i) => i.path[0] === "nombre",
-        );
-        expect(nombreError?.message).toBe(
-          "Nombre no puede contener numeros.",
-        );
+        const nombreError = result.error.issues.find((i) => i.path[0] === "nombre");
+        expect(nombreError?.message).toBe("Nombre no puede contener numeros.");
       }
     });
 
@@ -85,9 +79,7 @@ describe("schema", () => {
       const result = schema.safeParse({ ...validInput, apellido: "" });
       expect(result.success).toBe(false);
       if (!result.success) {
-        const apellidoError = result.error.issues.find(
-          (i) => i.path[0] === "apellido",
-        );
+        const apellidoError = result.error.issues.find((i) => i.path[0] === "apellido");
         expect(apellidoError?.message).toBe("Debe ingresar sus apellidos");
       }
     });
@@ -96,12 +88,8 @@ describe("schema", () => {
       const result = schema.safeParse({ ...validInput, apellido: "Pérez99" });
       expect(result.success).toBe(false);
       if (!result.success) {
-        const apellidoError = result.error.issues.find(
-          (i) => i.path[0] === "apellido",
-        );
-        expect(apellidoError?.message).toBe(
-          "Nombre no puede contener numeros.",
-        );
+        const apellidoError = result.error.issues.find((i) => i.path[0] === "apellido");
+        expect(apellidoError?.message).toBe("Nombre no puede contener numeros.");
       }
     });
   });

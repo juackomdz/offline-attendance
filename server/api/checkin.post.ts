@@ -1,28 +1,22 @@
-import { schema } from "#shared/schema";
+import { schema } from "#shared/zod/schema";
+import { registrosTable } from "#shared/drizzle/schema";
 import { formatRut } from "rut-kit";
-import { db } from "#shared/db";
+import { db } from "#shared/drizzle/db";
 
 export default eventHandler(async (event) => {
   const { data: body } = await readValidatedBody(event, schema.safeParse);
 
-  try {
-    const query = db.prepare(
-      `INSERT INTO REGISTROS (rut, nombres, apellidos, tipo, marcacion) VALUES ($rut, $nombres, $apellidos, $tipo, $marcacion);`,
-    );
+  const checkin: typeof registrosTable.$inferInsert = {
+    rut: formatRut(body?.rut as string, "formatted"),
+    nombres: body?.nombre,
+    apellidos: body?.apellido,
+    tipo: "entarda",
+    marcacion: new Date().toLocaleString(),
+  };
 
-    query.run({
-      $rut: formatRut(body?.rut as string, "formatted"),
-      $nombres: body?.nombre as string,
-      $apellidos: body?.apellido as string,
-      $tipo: "entrada",
-      $marcacion: new Date().toISOString(),
-    });
+  await db.insert(registrosTable).values(checkin);
 
-    return {
-      mensaje: "ok",
-    };
-  } catch (error) {
-    console.log(error);
-    throw error;
-  }
+  return {
+    mensaje: "ok",
+  };
 });
