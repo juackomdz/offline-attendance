@@ -3,6 +3,5 @@
   "bunVersion": "1.x",
   "devCommand": "bun run dev",
   "framework": "nuxtjs",
-  "installCommand": "bun install",
-  "outputDirectory": ".output/public"
+  "installCommand": "bun install"
 }
