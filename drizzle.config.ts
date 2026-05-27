@@ -1,5 +1,5 @@
 /// <reference types="bun"/>
-import { defineConfig } from "drizzle-kit";
+import { defineConfig, type Config } from "drizzle-kit";
 
 export default defineConfig({
   out: "./drizzle",
@@ -8,4 +8,4 @@ export default defineConfig({
   dbCredentials: {
     url: `:memory:`,
   },
-});
+}) satisfies Config;
