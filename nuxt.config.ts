@@ -4,21 +4,19 @@ import Aura from "@primeuix/themes/aura";
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
-  modules: ["@primevue/nuxt-module", "@nuxtjs/tailwindcss"],
+  modules: ["@primevue/nuxt-module", "@nuxtjs/tailwindcss", "@nuxt/test-utils/module"],
   nitro: {
     vercel: {
       functions: {
-        runtime: "bun1.x"
-      }
+        runtime: "bun1.x",
+      },
     },
-    preset: "vercel"
+    preset: "vercel",
   },
   app: {
     head: {
-      title: 'Asistencia',
-      link: [
-        { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
-      ],
+      title: "Asistencia",
+      link: [{ rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }],
       meta: [
         {
           name: "viewport",

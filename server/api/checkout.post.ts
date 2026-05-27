@@ -1,20 +1,22 @@
-import { type Asistencia, asistencias } from "#shared/types";
-import { schema } from "#shared/schema";
+import { schema } from "#shared/zod/schema";
 import { formatRut } from "rut-kit";
+import { db } from "#shared/drizzle/db";
+import { registrosTable } from "#shared/drizzle/schema";
 
 export default eventHandler(async (event) => {
   const { data: body } = await readValidatedBody(event, schema.safeParse);
 
-  const asistencia: Asistencia = {
+  const checkout: typeof registrosTable.$inferInsert = {
     rut: formatRut(body?.rut as string, "formatted"),
-    nombre: body?.nombre,
-    apellido: body?.apellido,
-    hora_salida: new Date(),
-  } as Asistencia;
+    nombres: body?.nombre,
+    apellidos: body?.apellido,
+    tipo: "salida",
+    marcacion: new Date().toLocaleString(),
+  };
 
-  asistencias.push(asistencia);
+  await db.insert(registrosTable).values(checkout);
+
   return {
     mensaje: "ok",
-    data: asistencia,
   };
 });

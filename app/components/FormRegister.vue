@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { useForm } from "@tanstack/vue-form";
 
-import { schema } from "#shared/schema";
+import { schema } from "#shared/zod/schema";
+import { isOnline } from "@/composables/useOnline";
+import { addPendiente } from "@/utils/localDb";
+
+const { online } = isOnline();
 
 import InputText from "primevue/inputtext";
 import Button from "primevue/button";
@@ -13,6 +17,50 @@ type SubmitMeta = {
 };
 
 const toast = useToast();
+
+const submitRegistro = async (
+  endpoint: "checkin" | "checkout",
+  value: { rut: string; nombre: string; apellido: string },
+) => {
+  const body = {
+    nombre: value.nombre,
+    rut: value.rut,
+    apellido: value.apellido,
+  };
+
+  if (online.value) {
+    await $fetch(`/api/${endpoint}`, {
+      method: "POST",
+      body,
+    });
+    toast.add({
+      summary: "Registro Exitoso",
+      life: 3000,
+      detail:
+        endpoint === "checkin"
+          ? "Ingreso registrado exitosamente"
+          : "Salida registrada exitosamente",
+      severity: "success",
+    });
+  } else {
+    await addPendiente({
+      rut: value.rut,
+      nombre: value.nombre,
+      apellido: value.apellido,
+      endpoint,
+    });
+    toast.add({
+      summary: "Registro Local",
+      life: 4000,
+      detail:
+        endpoint === "checkin"
+          ? "Ingreso guardado localmente. Se sincronizará al recuperar conexión."
+          : "Salida guardada localmente. Se sincronizará al recuperar conexión.",
+      severity: "warn",
+    });
+  }
+};
+
 const form = useForm({
   defaultValues: {
     rut: "",
@@ -24,51 +72,24 @@ const form = useForm({
   },
   onSubmitMeta: { endpoint: "checkin" } as SubmitMeta,
   onSubmit: async ({ value, meta }) => {
-    switch (meta.endpoint) {
-      case "checkin":
-        try {
-          await $fetch("/api/checkin", {
-            method: "POST",
-            body: {
-              nombre: value.nombre,
-              rut: value.rut,
-              apellido: value.apellido,
-            },
-          });
-          toast.add({
-            summary: "Registro Exitoso",
-            life: 3000,
-            detail: "Ingreso registrado exitosamente",
-            severity: "success",
-          });
-          form.reset();
-        } catch (err: any) {
-          console.log("Error al registrar asistencia");
-        }
-        break;
-      case "checkout":
-        try {
-          await $fetch("/api/checkout", {
-            method: "POST",
-            body: {
-              nombre: value.nombre,
-              rut: value.rut,
-              apellido: value.apellido,
-            },
-          });
-          toast.add({
-            summary: "Registro Exitoso",
-            life: 3000,
-            detail: "Salida registrada exitosamente",
-            severity: "success",
-          });
-          form.reset();
-        } catch (error) {
-          console.log(error);
-        }
-        break;
+    try {
+      await submitRegistro(meta.endpoint, value);
+      form.reset();
+    } catch (error) {
+      console.log(error);
     }
   },
+});
+
+watch(online, () => {
+  if (online.value === false) {
+    toast.add({
+      life: 2000,
+      summary: "Info",
+      severity: "contrast",
+      detail: "Almacenando localmente.",
+    });
+  }
 });
 </script>
 

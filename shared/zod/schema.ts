@@ -1,4 +1,4 @@
-import { z } from "zod";
+import * as z from "zod";
 import { rutSchema } from "rut-kit/zod";
 
 export const schema = z.object({
