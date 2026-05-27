@@ -10,7 +10,7 @@ sqlite.run(`CREATE TABLE registros (
 	nombres text,
 	apellidos text,
 	tipo text,
-	marcacion text`)
+	marcacion text)`)
 
 export const db = drizzle({ client: sqlite });
 
