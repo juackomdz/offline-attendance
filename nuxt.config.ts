@@ -6,11 +6,6 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ["@primevue/nuxt-module", "@nuxtjs/tailwindcss", "@nuxt/test-utils/module"],
   nitro: {
-    vercel: {
-      functions: {
-        runtime: "bun1.x",
-      },
-    },
     preset: "vercel",
   },
   app: {
