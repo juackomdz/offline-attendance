@@ -1,4 +1,4 @@
-/// <reference types="bun"/>
+/// <reference types="node"/>
 import { defineConfig, type Config } from "drizzle-kit";
 
 export default defineConfig({
@@ -6,7 +6,7 @@ export default defineConfig({
   schema: "./shared/drizzle/schema.ts",
   dialect: "turso",
   dbCredentials: {
-    url: Bun.env.TURSO_DB_URL!,
-    authToken: Bun.env.TURSO_AUTH_TOKEN!,
+    url: process.env.TURSO_DB_URL!,
+    authToken: process.env.TURSO_AUTH_TOKEN!,
   },
 }) satisfies Config;

@@ -3,16 +3,16 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "bun --bun nuxt build",
-    "dev": "bun --bun nuxt dev",
+    "build": "nuxt build",
+    "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "test": "bun --bun vitest",
+    "test": "vitest",
     "test:unit": "vitest run --config vitest.config.ts",
     "test:e2e": "vitest run --config vitest.e2e.config.ts",
     "test:ui": "vitest --ui",
-    "test:coverage": "bun --bun vitest --coverage"
+    "test:coverage": "vitest --coverage"
   },
   "dependencies": {
     "@libsql/client": "^0.17.3",
@@ -33,6 +33,7 @@
     "@nuxtjs/tailwindcss": "^6.14.0",
     "@primevue/nuxt-module": "^4.5.5",
     "@types/bun": "^1.3.13",
+    "@types/node": "^25.9.1",
     "@vue/test-utils": "^2.4.10",
     "drizzle-kit": "^0.31.10",
     "happy-dom": "^20.9.0",
