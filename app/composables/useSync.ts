@@ -1,5 +1,5 @@
 import { isOnline } from "@/composables/useOnline";
-import { addPendiente, getPendientes, removePendiente } from "@/utils/localDb";
+import { getPendientes, removePendiente } from "@/utils/localDb";
 
 export const useSync = () => {
   const { online } = isOnline();
