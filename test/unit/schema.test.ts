@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { schema } from "../../shared/schema";
+import { schema } from "../../shared/zod/schema";
 
 describe("schema", () => {
   const validInput = {
@@ -121,19 +121,19 @@ describe("schema", () => {
 
   describe("missing fields", () => {
     it("rejects input missing nombre", () => {
-      const { nombre, ...withoutNombre } = validInput;
+      const { ...withoutNombre } = validInput;
       const result = schema.safeParse(withoutNombre);
       expect(result.success).toBe(false);
     });
 
     it("rejects input missing rut", () => {
-      const { rut, ...withoutRut } = validInput;
+      const { ...withoutRut } = validInput;
       const result = schema.safeParse(withoutRut);
       expect(result.success).toBe(false);
     });
 
     it("rejects input missing apellido", () => {
-      const { apellido, ...withoutApellido } = validInput;
+      const { ...withoutApellido } = validInput;
       const result = schema.safeParse(withoutApellido);
       expect(result.success).toBe(false);
     });

@@ -1,7 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "bunVersion": "1.x",
-  "devCommand": "bun run dev",
+  "devCommand": "pnpm run dev",
   "framework": "nuxtjs",
-  "installCommand": "bun install"
+  "installCommand": "pnpm install"
 }

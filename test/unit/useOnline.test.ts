@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { ref, onMounted, onUnmounted, watch, type Ref } from "vue";
+import { onMounted, onUnmounted } from "vue";
 
 vi.mock("vue", async (importOriginal) => {
   const original = await importOriginal<typeof import("vue")>();
@@ -15,7 +15,7 @@ vi.mock("vue", async (importOriginal) => {
 });
 
 describe("isOnline", () => {
-  let onlineRef: Ref<boolean>;
+  //let onlineRef = ref<boolean>();
   let mountedCallback: (() => void) | undefined;
   let unmountedCallback: (() => void) | undefined;
   const listeners: Record<string, EventListener> = {};
@@ -41,9 +41,9 @@ describe("isOnline", () => {
   });
 
   async function callIsOnline() {
-    const { isOnline } = await import("@/composables/useOnline");
+    const { isOnline } = await import("../../app/composables/useOnline");
     const result = isOnline();
-    onlineRef = result.online;
+    //onlineRef = result.online;
 
     mountedCallback = (onMounted as unknown as { _callback?: () => void })._callback;
     unmountedCallback = (onUnmounted as unknown as { _callback?: () => void })._callback;

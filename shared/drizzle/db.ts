@@ -1,9 +1,8 @@
-import { Database } from "bun:sqlite";
-import { drizzle } from "drizzle-orm/bun-sqlite";
-import { migrate } from "drizzle-orm/bun-sqlite/migrator";
+import { drizzle } from "drizzle-orm/libsql/web";
 
-const sqlite = new Database(":memory:");
-
-export const db = drizzle({ client: sqlite });
-
-migrate(db, { migrationsFolder: "./drizzle" });
+export const db = drizzle({
+	connection: {
+		url: process.env.TURSO_DB_URL!,
+		authToken: process.env.TURSO_AUTH_TOKEN!
+	}
+});
