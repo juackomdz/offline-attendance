@@ -16,6 +16,7 @@ export default eventHandler(async (event) => {
 
   await db.insert(registrosTable).values(checkout);
 
+  setResponseStatus(event, 201)
   return {
     mensaje: "ok",
   };
