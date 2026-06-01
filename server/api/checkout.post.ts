@@ -2,11 +2,13 @@ import { schema } from "#shared/zod/schema";
 import { formatRut } from "rut-kit";
 import { db } from "#shared/drizzle/db";
 import { registrosTable } from "#shared/drizzle/schema";
+import { randomUUID } from "node:crypto";
 
 export default eventHandler(async (event) => {
   const { data: body } = await readValidatedBody(event, schema.safeParse);
 
   const checkout: typeof registrosTable.$inferInsert = {
+    id: randomUUID(),
     rut: formatRut(body?.rut as string, "formatted"),
     nombres: body?.nombre,
     apellidos: body?.apellido,
