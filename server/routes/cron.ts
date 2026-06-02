@@ -1,11 +1,20 @@
-import { db } from "#shared/drizzle/db"
-import { registrosTable } from "#shared/drizzle/schema"
+import { db } from "#shared/drizzle/db";
+import { registrosTable } from "#shared/drizzle/schema";
 
-export default eventHandler(async () => {
+export default eventHandler(async (event) => {
+  const authHeader = event.node.req.headers["authorization"];
+  const cronSecret = process.env.CRON_SECRET;
 
-    await db.delete(registrosTable);
+  if (!cronSecret || authHeader !== `Bearer ${cronSecret}`) {
+    throw createError({
+      statusCode: 403,
+      message: "Recurso no permitido",
+    });
+  }
 
-    return {
-        mensaje: "elementos eliminados"
-    }
-})
+  await db.delete(registrosTable);
+
+  return {
+    mensaje: "elementos eliminados",
+  };
+});

@@ -3,8 +3,10 @@
   "devCommand": "pnpm run dev",
   "framework": "nuxtjs",
   "installCommand": "pnpm install",
-  "crons": [{
-    "path": "/routes/cron",
-    "schedule": "0 23 * * *"
-  }]
+  "crons": [
+    {
+      "path": "/cron",
+      "schedule": "0 23 * * *"
+    }
+  ]
 }
